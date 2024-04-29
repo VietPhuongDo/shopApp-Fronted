@@ -1,0 +1,64 @@
+.container {
+  color: white; }
+
+.intro-section {
+  color: white;
+  padding: 20px;
+  text-align: center; }
+
+.product-header {
+  color: #e942b0; }
+
+.form-control {
+  background-color: #13172a;
+  border: 1px solid #1d2136;
+  color: white; }
+
+.form-control:focus {
+  border-color: white;
+  background-color: #13172a; }
+
+.form-label {
+  color: white; }
+
+.product-header {
+  color: #e942b0; }
+
+.product-order {
+  color: #69f4b5; }
+
+table {
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  border-collapse: separate;
+  border: 1px solid white;
+  border-spacing: 0;
+  background-color: #0c0d36; }
+
+th,
+td {
+  padding: 10px;
+  text-align: center; }
+
+.product-info {
+  display: flex;
+  align-items: center; }
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  margin-right: 10px; }
+
+.product-name {
+  color: white;
+  margin-right: 10px; }
+
+.btn-gradient {
+  background: linear-gradient(to right, #e140b4, #7e2bed);
+  color: white;
+  border-radius: 30px;
+  width: 200px; }
+
+/*# sourceMappingURL=order.component.css.map */
