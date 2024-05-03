@@ -1,15 +1,25 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {HomeComponent} from "./home/home.component";
-import {FooterComponent} from "./footer/footer.component";
-import {HeaderComponent} from "./header/header.component";
-import {CommonModule} from "@angular/common";
-import {RegisterComponent} from "./register/register.component";
-import {DetailProductComponent} from "./detail-product/detail-product.component";
-import {OrderComponent} from "./order/order.component";
-import {OrderConfirmComponent} from "./order-confirm/order-confirm.component";
-import {LoginComponent} from "./login/login.component";
+
+
 import {FormsModule} from "@angular/forms";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {OrderComponent} from "./components/order/order.component";
+import {OrderConfirmComponent} from "./components/order-confirm/order-confirm.component";
+import {LoginComponent} from "./components/login/login.component";
+import {HomeComponent} from "./components/home/home.component";
+import {HeaderComponent} from "./components/header/header.component";
+import {FooterComponent} from "./components/footer/footer.component";
+
+import {RegisterComponent} from "./components/register/register.component";
+import {CommonModule} from "@angular/common";
+
+
+
+export class YourModule { }
+
+import {TokenInterceptor} from "./interceptors/token.interceptor";
+import {DetailProductComponent} from "./components/detail-product/detail-product.component";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +27,7 @@ import {FormsModule} from "@angular/forms";
   imports: [ HomeComponent,
     HeaderComponent,
     FooterComponent,
-    DetailProductComponent, OrderComponent, OrderConfirmComponent, LoginComponent, RegisterComponent,CommonModule,FormsModule],
+    DetailProductComponent, OrderComponent, OrderConfirmComponent, LoginComponent, RegisterComponent,CommonModule,FormsModule,HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

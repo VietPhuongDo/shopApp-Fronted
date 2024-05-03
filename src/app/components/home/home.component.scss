@@ -1,77 +1,107 @@
 .intro-section {
   text-align: center;
   color: white;
-  padding: 20px; }
+  padding: 20px;
+}
 
 .search-box {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+}
 
 .product-category {
-  width: 200px; }
+  width: 200px;
+  margin-right: 10px; /* Thêm khoảng cách bên phải */
+}
 
 .search-input {
   width: 300px;
-  background-color: #13172a;
+  background-color: rgb(19, 23, 42);
   margin-right: 10px;
   border-color: rgba(255, 255, 255, 0.5);
-  color: white; }
+  color: white;
+}
 
 .form-control {
   background-color: transparent;
-  color: white; }
+  color: white;
+}
 
 .form-control::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: rgba(255, 255, 255, 0.5);
   opacity: 1;
-  /* Firefox */ }
+  /* Firefox */
+}
 
 .form-control:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: rgba(255, 255, 255, 0.5); }
+  color: rgba(255, 255, 255, 0.5);
+}
 
 .form-control::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: rgba(255, 255, 255, 0.5); }
+  color: rgba(255, 255, 255, 0.5);
+}
 
 .product-item {
-  background-color: #13172a;
-  border: 1px solid #23273d;
+  background-color: rgb(19, 23, 42);
+  border: 1px solid rgb(35, 39, 61);
   border-radius: 20px;
   padding: 20px;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+}
 
 .product-image {
   width: 100%;
   height: auto;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+}
 
 .product-name {
-  color: white; }
+  color: white;
+}
 
 .product-description {
-  color: #adb2cb; }
+  color: rgb(173, 178, 203);
+}
 
 .product-warranty {
-  color: #f27ed4; }
+  color: rgb(242, 126, 212);
+}
 
 .product-price {
-  color: white; }
+  color: white;
+}
 
 .product-rating {
   color: #FFD700;
-  margin-top: 10px; }
+  margin-top: 10px;
+}
 
 .product-actions {
   display: flex;
   justify-content: center;
-  margin-top: 20px; }
+  margin-top: 20px;
+}
 
 .space-x {
   margin: 0 5px;
-  /*margin-top, margin-right, margin-bottom, margin-left*/ }
+  /*margin-top, margin-right, margin-bottom, margin-left*/
+}
 
-/*# sourceMappingURL=home.component.css.map */
+.page-number {
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  margin: 0 2px;
+  border-radius: 3px;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
