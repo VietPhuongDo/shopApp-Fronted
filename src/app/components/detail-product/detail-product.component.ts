@@ -28,7 +28,6 @@ export class DetailProductComponent implements OnInit {
   productId: number = 0;
   currentImageIndex: number = 0;
   quantity: number = 1;
-  isPressedAddToCart:boolean = false;
   constructor(
     private productService: ProductService,
     private cartService: CartService,
@@ -41,10 +40,10 @@ export class DetailProductComponent implements OnInit {
   }
   ngOnInit() {
     // Lấy productId từ URL
-    // const idParam = this.activatedRoute.snapshot.paramMap.get('id');
+    const idParam = this.activatedRoute.snapshot.paramMap.get('id');
     debugger
-    this.cartService.clearCart();
-    const idParam = 9 //fake tạm 1 giá trị
+    //this.cartService.clearCart();
+    //const idParam = 9 //fake tạm 1 giá trị
     if (idParam !== null) {
       this.productId = +idParam;
     }
@@ -105,9 +104,8 @@ export class DetailProductComponent implements OnInit {
   }
   addToCart(): void {
     debugger
-    this.isPressedAddToCart = true;
     if (this.product) {
-      this.cartService.addToCart(this.productId, this.quantity);
+      this.cartService.addToCart(this.product.id, this.quantity);
     } else {
       // Xử lý khi product là null
       console.error('Không thể thêm sản phẩm vào giỏ hàng vì product là null.');
@@ -115,7 +113,6 @@ export class DetailProductComponent implements OnInit {
   }
 
   increaseQuantity(): void {
-    debugger
     this.quantity++;
   }
 
@@ -124,16 +121,8 @@ export class DetailProductComponent implements OnInit {
       this.quantity--;
     }
   }
-  getTotalPrice(): number {
-    if (this.product) {
-      return this.product.price * this.quantity;
-    }
-    return 0;
-  }
+
   buyNow(): void {
-    if(this.isPressedAddToCart == false) {
-      this.addToCart();
-    }
     this.router.navigate(['/orders']);
   }
 }

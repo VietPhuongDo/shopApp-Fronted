@@ -1,22 +1,19 @@
-import { ApplicationConfig } from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, Provider} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import {HTTP_INTERCEPTORS, provideHttpClient, withFetch} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
-import {LocalStorageService} from "ngx-webstorage";
 
+const tokenInterceptorProvider: Provider =
+  { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true };
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withFetch()),
     provideRouter(routes),
+    provideHttpClient(withFetch()),
+    tokenInterceptorProvider,
     provideClientHydration(),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    LocalStorageService
+    importProvidersFrom(HttpClientModule),
     ]
 };

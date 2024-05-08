@@ -9,11 +9,15 @@ import {CategoryService} from "../../services/category.service";
 import {ProductService} from "../../services/product.service";
 import {CommonModule, NgClass} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, NgClass, FormsModule,CommonModule],
+  imports: [ FooterComponent,
+    HeaderComponent,
+    CommonModule,
+    FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -31,11 +35,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenService
   ) {}
 
   ngOnInit() {
-    this.currentPage = 1;
     this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     this.getCategories(1, 100);
   }
@@ -99,10 +103,8 @@ export class HomeComponent implements OnInit {
 
     return new Array(endPage - startPage + 1).fill(0).map((_, index) => startPage + index);
   }
-
   onProductClick(productId: number) {
     debugger
-    //navigate to detail with param productt-id
-    this.router.navigate(['/detail-product', productId]);
+    this.router.navigate(['/products', productId]);
   }
 }

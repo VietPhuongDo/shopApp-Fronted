@@ -9,8 +9,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = this.tokenService.getToken();
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('access_token')
     if (token) {
       req = req.clone({
         setHeaders: {
@@ -20,5 +21,4 @@ export class TokenInterceptor implements HttpInterceptor {
     }
     return next.handle(req);
   }
-
 }

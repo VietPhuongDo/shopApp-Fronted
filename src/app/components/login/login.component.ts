@@ -3,7 +3,7 @@ import {FooterComponent} from "../footer/footer.component";
 import {HeaderComponent} from "../header/header.component";
 import {FormsModule, NgForm} from "@angular/forms";
 import {LoginDTO} from "../../dtos/user/login.dto";
-import {Router, RouterModule} from "@angular/router";
+import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
@@ -11,6 +11,7 @@ import {LoginResponse} from "../../responses/user/login.response";
 import {TokenService} from "../../services/token.service";
 import {RoleService} from "../../services/role.service";
 import {Role} from "../../models/role";
+import {UserResponse} from "../../responses/user/user.response";
 
 
 @Component({
@@ -26,26 +27,27 @@ import {Role} from "../../models/role";
   styleUrl: './login.component.scss'
 })
 
-
 export class LoginComponent {
   @ViewChild('loginForm') loginForm!: NgForm;
 
   phoneNumber: string = '33445566';
   password: string = '123456';
 
-  roles: Role[] = []; // Mảng roles
+  roles: Role[] = [];
   rememberMe: boolean = true;
-  selectedRole: Role | undefined; // Biến để lưu giá trị được chọn từ dropdown
+  selectedRole: Role | undefined;
+  userResponse?:UserResponse
 
   onPhoneNumberChange() {
     console.log(`Phone typed: ${this.phoneNumber}`);
-    //how to validate ? phone must be at least 6 characters
+
   }
   constructor(
     private router: Router,
+    private activateRoute: ActivatedRoute,
     private userService: UserService,
     private tokenService: TokenService,
-    private roleService: RoleService
+    private roleService: RoleService,
   ) { }
 
   ngOnInit() {
@@ -55,6 +57,9 @@ export class LoginComponent {
         debugger
         this.roles = roles;
         this.selectedRole = roles.length > 0 ? roles[0] : undefined;
+      },
+      complete: () => {
+        debugger
       },
       error: (error: any) => {
         debugger
@@ -66,7 +71,6 @@ export class LoginComponent {
   login() {
     const message = `phone: ${this.phoneNumber}` +
       `password: ${this.password}`;
-    //alert(message);
     debugger
 
     const loginDTO: LoginDTO = {
@@ -80,15 +84,33 @@ export class LoginComponent {
         const { token } = response;
         if (this.rememberMe) {
           this.tokenService.setToken(token);
+          debugger;
+          this.userService.getUserDetails(token).subscribe({
+            next: (response: any) => {
+              debugger;
+              this.userResponse = {
+                ...response,
+                date_of_birth: new Date(response.date_of_birth),
+              }
+              this.userService.saveUserResponseToLocalStorage(this.userResponse);
+              this.router.navigate(['/']);
+            },
+            complete: () => {
+              debugger;
+            },
+            error: (error: any) => {
+              debugger;
+              console.error(error.error.message);
+            }
+          })
         }
-        //this.router.navigate(['/login']);
       },
       complete: () => {
         debugger;
       },
       error: (error: any) => {
         debugger;
-        alert(error?.error?.message);
+        alert(error.error.message);
       }
     });
   }
